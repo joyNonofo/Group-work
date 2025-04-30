@@ -1,7 +1,6 @@
 public class Club{
 
     String clubname;
-    //ArrayList<Player> players;
     //Club constructor
     Club(String clubname){
 
