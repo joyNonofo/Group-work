@@ -1,4 +1,4 @@
-public class MainPlayer extends Sorter{
+public class MainPlayer Sorter{
 
     public static void main(String[] args){
 
