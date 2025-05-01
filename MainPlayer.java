@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class MainPlayer{
 
     public static void main(String[] args){
@@ -17,6 +19,13 @@ public class MainPlayer{
         //Create array for players
         Player[] players= {player1, player2, player3, player4, player5, player6, player7, player8, player9, player10};
 
+        //Display players
+        System.out.printf("Available players: ");
+
+        for(int i= 0; i< players.lenth; i++){
+            System.out.printf("%d. %s (%s) - Market Value: $%d million", i+1, players[i].getName(), players[i].getPosition(), players[i].getMarketValue());
+        }
+        
         //Sort the array by market value
         selectionSortMV(players);
 
@@ -41,28 +50,46 @@ public class MainPlayer{
         //Print out the most talented player with the best rating
         System.out.printf("Player with the highest rating is "+ lowestRA.getName()+": " +lowestRA.getMarketValue()+ ".\n" );
 
+        Scanner in= new Scanner(System.in);
+        //Prompt user to select aplayer to buy
+        System.out.printf("Enter the number of the player you want to buy: ");
+        int choice= in.nextInt();
+        
+        if(choice < 1 || choice > players.length){
+            System.out.println("Invalid choice.");
+            return;
+        }
+        Player selectedPlayer= players[choice-1];
+        
+        //Prompt user for offer amount
+        System.out.printf("Enter your offer amount: ");
+        int offerAmount= in.nextInt();
+
         //Search for a player with a market value of 50 millon
-        int indexMV= linearSearchMV(players, 50);
+        int indexMV= linearSearchMV(players, offerAmount);
         
         if (indexMV != -1){
             System.out.printf("Found: "+players[indexMV].getName()+ " with market value of $"+ players[indexMV].getMarketValue()+" millon.\n");
+            System.out.printf("The player's club, " +players[index].getClub().clubname +"is processing your offer.....");
         }
         else{
             System.out.printf("Player not found with that market value\n");
+            System.out.printf("The player's club, " +players[index].getClub().clubname +"is processing your offer.....");
         }
 
-        //Search for a player with a overall rating of 84
-        int indexRA= linearSearchRA(players, 84);
-
-        if (indexRA != -1){
-            System.out.printf("Found: " + players[indexRA].getName()+ " with rating of " + players[indexRA].getRating()+ ".\n");
+       try{
+           //Show how the buyPlayer method in the Club class works
+            Club.buyPlayer(selectedPlayer, offerAmount);
+       }
+        catch(UsageException e){
+            System.out.println("Purchase failed. " + e.getMessage());
         }
-        else{
-            System.out.printf("Player not found with that rating\n");
+        catch(Exception e){
+            System.out.println("An error ocurred: " + e.getMessage());
         }
-
-        //Show how the buyPlayer method in the Club class works
-        Club.buyPlayer(player8, 78);
+        finally{
+            in.close();
+        }
     }
     
 
