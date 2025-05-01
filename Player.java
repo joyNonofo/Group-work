@@ -9,7 +9,24 @@
     //Each player has a club which he plays for
     private Club club;
 
-    public Player(String name, int age, String position, int rating, int marketValue, Club club){
+    public Player(String name, int age, String position, int rating, int marketValue, Club club) throws UsageExpception {
+
+        if (name==null || name.trim().isEmpty()){
+          throw new UsageException("Player name cannot be empty.");
+        }
+        if (age <= 0 || age > 100){
+          throw new UsageException("Invalid age.");
+        }
+        if (position=null){
+          throw new UsageException("Position can not be empty.");
+        }
+        if (rating < 0 || rating > 100){
+          throw new UsageException("Rating must be between o to 100.");
+        }
+        if (marketValue < 0){
+          throw new UsageException("Market value can not be negative.");
+        }
+        //club can be null
 
         this.name= name;
         this.age= age;
