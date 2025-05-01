@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MainPlayer{
+public class MainPlayer extends Sorter{
 
     public static void main(String[] args){
 
@@ -22,7 +22,7 @@ public class MainPlayer{
         //Display players
         System.out.printf("Available players: ");
 
-        for(int i= 0; i< players.lenth; i++){
+        for(int i= 0; i< players.length; i++){
             System.out.printf("%d. %s (%s) - Market Value: $%d million", i+1, players[i].getName(), players[i].getPosition(), players[i].getMarketValue());
         }
         
